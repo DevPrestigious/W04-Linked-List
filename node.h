@@ -55,7 +55,6 @@ public:
              pPrev <- NULL*/
 
       pNext = pPrev = this;
-      this->data = std::move(data);
    }
 
    Node(T&& data) // MOVE -- Steve
