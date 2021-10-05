@@ -1,4 +1,4 @@
-/***********************************************************************
+﻿/***********************************************************************
  * Header:
  *    NODE
  * Summary:
@@ -36,21 +36,34 @@ public:
    //
    // Construct
    //
-   //
-   // Construct
-   //
-
-   Node() 
+    
+   Node() // DEFAULT
    { 
+       /*Node.default - constructor()
+           data <- T()
+           pNext <- NULL
+           pPrev <- NULL*/
+
       pNext = pPrev = this;
    }
-   Node(const T& data) 
+   Node(const T& data) // COPY
    {
+       // COPY VALUE CONSTRUCTOR
+       /*Node.copy-constructor(t)
+             data <- t
+             pNext <- NULL
+             pPrev <- NULL*/
+
       pNext = pPrev = this;
    }
 
-   Node(T&& data) 
+   Node(T&& data) // MOVE
    {
+      // SWAP????
+       /*this->data = data;
+       pNext = sizeof(data);
+       pPrev = pNext - 1;*/
+
       pNext = pPrev = this;
    }
 
@@ -74,6 +87,14 @@ public:
 template <class T>
 inline Node <T> * copy(const Node <T> * pSource) 
 {
+    // COPY CONSTRUCTOR
+       /*copy(pSource)
+           pDestination <- new Node(pSource.data)
+           pSrc <- pSource
+           pDes <- pDestination
+           FOR pSrc <- pSrc.pNext … end of the list
+           pDes <- insert(pSrc.data, pDes, true)
+           RETURN pDestination*/
    return new Node<T>;
 }
 
@@ -88,7 +109,15 @@ inline Node <T> * copy(const Node <T> * pSource)
 template <class T>
 inline void assign(Node <T> * & pDestination, const Node <T> * pSource)
 {
-   
+    /*IF pSrc ≠ NULL
+        setToNull <- FALSE
+        IF pDes.pRev != NULL
+        pDEs.pPrev.pNext <- NULL
+        ELSE
+        setToNull <- TRUE
+        freeData(pDes)
+        IF setToNull
+        pDestination <- NULL*/
 }
 
 /***********************************************
@@ -112,7 +141,19 @@ inline void swap(Node <T>* &pLHS, Node <T>* &pRHS)
 template <class T>
 inline Node <T> * remove(const Node <T> * pRemove) 
 {
-   
+    /*remove(pRemove)
+        IF NULL = pRemove
+        RETURN
+        IF pRemove.pPrev
+        pRemove.pPrev.pNext <- pRemove.pNext
+        IF pRemove.pNext
+        pRemove.pNext.pPrev <- pRemove.pPrev
+        IF pRemove.pPrev
+        pReturn <- pRemove.pPrev;
+    ELSE
+        pReturn <- pRemove.pNext
+        DELETE pRemove
+        RETURN pReturn*/
    return new Node<T>;
 }
 
@@ -133,6 +174,17 @@ inline Node <T> * insert(Node <T> * pCurrent,
                   const T & t,
                   bool after = false)
 {
+    /*insert(t, pCurrent, after)
+        pNew <- NEW Node(t)
+        IF pCurrent != NULLand after = false
+        pNew.pNext <- pCurrent
+        pNew.pPrev <- pCurrent.pPrev
+        pCurrent.pPrev <- pNew
+        IF pNew.pPrev
+        pNew.pPrev.pNext <- pNew
+        IF pCurrent != NULL and after = true
+        … something similar …
+        RETURN pNew*/
    return new Node<T>();
 }
 
@@ -148,6 +200,11 @@ inline Node <T> * insert(Node <T> * pCurrent,
 template <class T>
 inline size_t size(const Node <T> * pHead)
 {
+    //size(pHead)
+    //    IF pHead = NULL
+    //RETURN 0
+    //    ELSE
+    //RETURN 1 + size(pHead.pNext)
    return 99;
 }
 
@@ -162,6 +219,14 @@ inline size_t size(const Node <T> * pHead)
 template <class T>
 inline std::ostream & operator << (std::ostream & out, const Node <T> * pHead)
 {
+    //inline friend std::ostream& operator << (std::ostream & out,
+    //    const Complex & rhs)
+    //{
+    //    out << rhs.r;
+    //    if (rhs.i != 0.0)                       // only display the imaginary
+    //        out << " + " << rhs.i << "i";        //    component if non-zero
+    //    return out;                             // return "out"
+    //}
    return out;
 }
 
@@ -175,7 +240,12 @@ inline std::ostream & operator << (std::ostream & out, const Node <T> * pHead)
 template <class T>
 inline void clear(Node <T> * & pHead)
 {
-   
+    /*clear(pHead)
+        WHILE pHead != NULL
+        pDelete <- pHead
+        pHead <- pHead.pNext
+        DELETE pDelete*/
+
 }
 
 
