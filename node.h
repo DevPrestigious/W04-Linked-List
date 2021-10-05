@@ -92,6 +92,7 @@ inline Node <T> * copy(const Node <T> * pSource) // --Alex
            FOR pSrc <- pSrc.pNext … end of the list
            pDes <- insert(pSrc.data, pDes, true)
            RETURN pDestination*/
+
    return new Node<T>;
 }
 
