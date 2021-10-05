@@ -37,7 +37,7 @@ public:
    // Construct
    //
     
-   Node() // DEFAULT
+   Node() // DEFAULT -- Alex
    { 
        /*Node.default - constructor()
            data <- T()
@@ -46,7 +46,7 @@ public:
 
       pNext = pPrev = this;
    }
-   Node(const T& data) // COPY
+   Node(const T& data) // COPY -- Jon
    {
        // COPY VALUE CONSTRUCTOR
        /*Node.copy-constructor(t)
@@ -57,7 +57,7 @@ public:
       pNext = pPrev = this;
    }
 
-   Node(T&& data) // MOVE
+   Node(T&& data) // MOVE -- Steve
    {
       // SWAP????
        /*this->data = data;
@@ -85,7 +85,7 @@ public:
  *   COST   : O(n)
  **********************************************/
 template <class T>
-inline Node <T> * copy(const Node <T> * pSource) 
+inline Node <T> * copy(const Node <T> * pSource) // --Alex
 {
     // COPY CONSTRUCTOR
        /*copy(pSource)
@@ -107,7 +107,7 @@ inline Node <T> * copy(const Node <T> * pSource)
  *   COST   : O(n)
  **********************************************/
 template <class T>
-inline void assign(Node <T> * & pDestination, const Node <T> * pSource)
+inline void assign(Node <T> * & pDestination, const Node <T> * pSource) // -- Jon
 {
     /*IF pSrc ≠ NULL
         setToNull <- FALSE
@@ -126,7 +126,7 @@ inline void assign(Node <T> * & pDestination, const Node <T> * pSource)
  *   COST   : O(1)
  **********************************************/
 template <class T>
-inline void swap(Node <T>* &pLHS, Node <T>* &pRHS)
+inline void swap(Node <T>* &pLHS, Node <T>* &pRHS) // -- Steve
 {
    
 }
@@ -139,7 +139,7 @@ inline void swap(Node <T>* &pLHS, Node <T>* &pRHS)
  *   COST   : O(1)
  **********************************************/
 template <class T>
-inline Node <T> * remove(const Node <T> * pRemove) 
+inline Node <T> * remove(const Node <T> * pRemove) // -- Alex
 {
     /*remove(pRemove)
         IF NULL = pRemove
@@ -169,7 +169,7 @@ inline Node <T> * remove(const Node <T> * pRemove)
  *   OUTPUT  : return the newly inserted item
  *   COST    : O(1)
  **********************************************/
-template <class T>
+template <class T> // -- Alex
 inline Node <T> * insert(Node <T> * pCurrent,
                   const T & t,
                   bool after = false)
@@ -198,7 +198,7 @@ inline Node <T> * insert(Node <T> * pCurrent,
  *  COST    : O(n)
  ********************************************************/
 template <class T>
-inline size_t size(const Node <T> * pHead)
+inline size_t size(const Node <T> * pHead) // -- Jon
 {
     //size(pHead)
     //    IF pHead = NULL
@@ -217,7 +217,7 @@ inline size_t size(const Node <T> * pHead)
  *    COST   : O(n)
  **********************************************/
 template <class T>
-inline std::ostream & operator << (std::ostream & out, const Node <T> * pHead)
+inline std::ostream & operator << (std::ostream & out, const Node <T> * pHead) // -- Steve
 {
     //inline friend std::ostream& operator << (std::ostream & out,
     //    const Complex & rhs)
@@ -238,7 +238,7 @@ inline std::ostream & operator << (std::ostream & out, const Node <T> * pHead)
  *   COST    : O(n)
  ****************************************************/
 template <class T>
-inline void clear(Node <T> * & pHead)
+inline void clear(Node <T> * & pHead) // -- Alex
 {
     /*clear(pHead)
         WHILE pHead != NULL
