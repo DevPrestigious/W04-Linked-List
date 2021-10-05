@@ -55,16 +55,13 @@ public:
              pPrev <- NULL*/
 
       pNext = pPrev = this;
+      this->data = std::move(data);
    }
 
    Node(T&& data) // MOVE -- Steve
    {
-      // SWAP????
-       /*this->data = data;
-       pNext = sizeof(data);
-       pPrev = pNext - 1;*/
-
-      pNext = pPrev = this;
+      this->data = std::move(data);
+      //pNext = pPrev = this;
    }
 
    //
@@ -128,7 +125,9 @@ inline void assign(Node <T> * & pDestination, const Node <T> * pSource) // -- Jo
 template <class T>
 inline void swap(Node <T>* &pLHS, Node <T>* &pRHS) // -- Steve
 {
-   
+    Node <T>* test = std::move(pLHS);
+    pLHS = std::move(pRHS);
+    pRHS = std::move(test);
 }
 
 /***********************************************
