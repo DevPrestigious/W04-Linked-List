@@ -14,7 +14,7 @@
  *        Node         : A class representing a Node
  *    Additionally, it will contain a few functions working on Node
  * Author
- *    Stephen Costigan, 
+ *    Stephen Costigan, Alexander Dohms
  ************************************************************************/
 
 #pragma once
