@@ -181,7 +181,7 @@ inline Node <T> * remove(const Node <T> * pRemove) // -- Alex (Stolen by Steve)
  *   OUTPUT  : return the newly inserted item
  *   COST    : O(1)
  **********************************************/
-template <class T> // -- Jon
+template <class T> // -- Jon -- (Added to by Steve)
 inline Node <T> * insert(Node <T> * pCurrent,
                   const T & t,
                   bool after = false)
@@ -198,6 +198,8 @@ inline Node <T> * insert(Node <T> * pCurrent,
         … something similar …
         RETURN pNew*/
 
+
+    // THIS LOOKS RIGHT, BUT DOESN'T CHANGE %. FEEL FREE TO EDIT
     Node <T>* pNew = new Node <T>(t);
 
     if (pCurrent == NULL)
