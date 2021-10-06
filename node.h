@@ -248,7 +248,7 @@ inline void clear(Node <T> * & pHead) // -- Steve
         pHead <- pHead.pNext
         DELETE pDelete*/
 
-    Node <T>* pDelete = pHead;
+    Node <T>* pDelete = pHead; // redundant for first loop, but oh well
     while (pHead != nullptr) {
         pDelete = pHead;
         pHead = pHead->pNext;
