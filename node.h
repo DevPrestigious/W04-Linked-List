@@ -197,7 +197,33 @@ inline Node <T> * insert(Node <T> * pCurrent,
         IF pCurrent != NULL and after = true
         … something similar …
         RETURN pNew*/
-   return new Node<T>();
+
+    Node <T>* pNew = new Node <T>(t);
+
+    if (pCurrent == NULL)
+        return pNew;
+
+    if (after) 
+    {
+        pNew->pNext = pCurrent->pNext;
+        pNew->pPrev = pCurrent;
+
+        if (pCurrent->pNext)
+            pCurrent->pNext->pPrev = pNew;
+        pCurrent->pNext = pNew;
+    }
+    else 
+    {  
+        pNew->pNext = pCurrent;
+        pNew->pPrev = pCurrent->pPrev;
+
+        if (pCurrent->pPrev)
+            pCurrent->pPrev->pNext = pNew;
+
+        pCurrent->pPrev = pNew;
+    }
+
+    return pNew;
 }
 
 /******************************************************
