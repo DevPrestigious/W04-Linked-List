@@ -59,7 +59,7 @@ public:
 
    Node(T&& data) // MOVE -- Steve
    {
-       std::swap(this->data, data);
+       this->data = data;
    }
 
    //
