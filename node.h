@@ -59,8 +59,7 @@ public:
 
    Node(T&& data) // MOVE -- Steve
    {
-      this->data = std::move(data);
-      //pNext = pPrev = this;
+       std::swap(this->data, data);
    }
 
    //
