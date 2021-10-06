@@ -168,7 +168,7 @@ inline Node <T> * remove(const Node <T> * pRemove) // -- Alex
  *   OUTPUT  : return the newly inserted item
  *   COST    : O(1)
  **********************************************/
-template <class T> // -- Alex
+template <class T> // -- Jon
 inline Node <T> * insert(Node <T> * pCurrent,
                   const T & t,
                   bool after = false)
@@ -197,7 +197,7 @@ inline Node <T> * insert(Node <T> * pCurrent,
  *  COST    : O(n)
  ********************************************************/
 template <class T>
-inline size_t size(const Node <T> * pHead) // -- Jon
+inline size_t size(const Node <T> * pHead) // -- Steve
 {
     //size(pHead)
     //    IF pHead = NULL
@@ -216,7 +216,7 @@ inline size_t size(const Node <T> * pHead) // -- Jon
  *    COST   : O(n)
  **********************************************/
 template <class T>
-inline std::ostream & operator << (std::ostream & out, const Node <T> * pHead) // -- Steve
+inline std::ostream & operator << (std::ostream & out, const Node <T> * pHead) // -- Alex
 {
     //inline friend std::ostream& operator << (std::ostream & out,
     //    const Complex & rhs)
@@ -237,7 +237,7 @@ inline std::ostream & operator << (std::ostream & out, const Node <T> * pHead) /
  *   COST    : O(n)
  ****************************************************/
 template <class T>
-inline void clear(Node <T> * & pHead) // -- Alex
+inline void clear(Node <T> * & pHead) // -- Steve
 {
     /*clear(pHead)
         WHILE pHead != NULL
