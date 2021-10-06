@@ -151,13 +151,24 @@ inline Node <T> * remove(const Node <T> * pRemove) // -- Alex
         pReturn <- pRemove.pNext
         DELETE pRemove
         RETURN pReturn*/
+    Node <T>* pReturn = NULL;
     if (pRemove == NULL)
-        return NULL;
+        return pReturn;
+
     if (pRemove->pPrev)
-        return pRemove->pPrev->pNext = pRemove->pNext;
+        pRemove->pPrev->pNext = pRemove->pNext;
+
     if (pRemove->pNext)
-        return pRemove->pPrev;
-    Node <T>* pReturn = pRemove->pNext;
+        pRemove->pPrev;
+
+    if (pRemove->pPrev) {
+        pReturn = pRemove->pPrev;
+    }
+    else 
+    {
+        pReturn = pRemove->pNext;
+    }
+    
     delete pRemove;
     return pReturn;
 }
