@@ -136,7 +136,7 @@ inline void swap(Node <T>* &pLHS, Node <T>* &pRHS) // -- Steve
  *   COST   : O(1)
  **********************************************/
 template <class T>
-inline Node <T> * remove(const Node <T> * pRemove) // -- Alex
+inline Node <T> * remove(const Node <T> * pRemove) // -- Alex (Added to by Steve)
 {
     /*remove(pRemove)
         IF NULL = pRemove
@@ -151,6 +151,13 @@ inline Node <T> * remove(const Node <T> * pRemove) // -- Alex
         pReturn <- pRemove.pNext
         DELETE pRemove
         RETURN pReturn*/
+
+    /* MOSTLY DONE, STILL GETTING THESE ERRORS
+        TestNode::test_remove_front()
+            line:637 condition : p26->pPrev == nullptr
+        TestNode::test_remove_middle()
+            line : 740 condition : p31->pPrev == p11*/
+
     Node <T>* pReturn = NULL;
     if (pRemove == NULL)
         return pReturn;
@@ -236,7 +243,7 @@ inline size_t size(const Node <T> * pHead) // -- Steve
  *    COST   : O(n)
  **********************************************/
 template <class T>
-inline std::ostream & operator << (std::ostream & out, const Node <T> * pHead) // -- Alex (Stolen by steve haha)
+inline std::ostream & operator << (std::ostream & out, const Node <T> * pHead) // -- Alex (Added to by steve)
 {
     while (pHead != nullptr) {
         out << pHead ; // Wasn't sure how they wanted the data returned, just returned the value. Edit if you find anything
