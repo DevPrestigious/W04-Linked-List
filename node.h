@@ -152,12 +152,6 @@ inline Node <T> * remove(const Node <T> * pRemove) // -- Alex (Added to by Steve
         DELETE pRemove
         RETURN pReturn*/
 
-    /* MOSTLY DONE, STILL GETTING THESE ERRORS
-        TestNode::test_remove_front()
-            line:637 condition : p26->pPrev == nullptr
-        TestNode::test_remove_middle()
-            line : 740 condition : p31->pPrev == p11*/
-
     Node <T>* pReturn = NULL;
     if (pRemove == NULL)
         return pReturn;
