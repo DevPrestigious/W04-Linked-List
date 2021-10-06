@@ -136,7 +136,7 @@ inline void swap(Node <T>* &pLHS, Node <T>* &pRHS) // -- Steve
  *   COST   : O(1)
  **********************************************/
 template <class T>
-inline Node <T> * remove(const Node <T> * pRemove) // -- Alex (Added to by Steve)
+inline Node <T> * remove(const Node <T> * pRemove) // -- Alex (Stolen by Steve)
 {
     /*remove(pRemove)
         IF NULL = pRemove
@@ -164,7 +164,6 @@ inline Node <T> * remove(const Node <T> * pRemove) // -- Alex (Added to by Steve
 
     pReturn = pRemove->pPrev ? pRemove->pPrev : pRemove->pNext;
 
-    
     delete pRemove;
     return pReturn;
 }
