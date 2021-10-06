@@ -53,7 +53,7 @@ public:
              pNext <- NULL
              pPrev <- NULL*/
 
-      pNext = pPrev = this;
+      pNext = pPrev = NULL;
    }
 
    Node(T&& data) // MOVE -- Steve
