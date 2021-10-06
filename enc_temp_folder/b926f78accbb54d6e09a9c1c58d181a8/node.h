@@ -247,12 +247,11 @@ inline void clear(Node <T> * & pHead) // -- Steve
         pDelete <- pHead
         pHead <- pHead.pNext
         DELETE pDelete*/
-
     Node <T>* pDelete = new Node <T>;
     while (pHead != nullptr) {
         pDelete = pHead;
-        pHead = pHead->pNext;
         delete pDelete;
+        pHead = pHead->pNext;
     }
 }
 
