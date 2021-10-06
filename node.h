@@ -43,8 +43,7 @@ public:
            data <- T()
            pNext <- NULL
            pPrev <- NULL*/
-
-      pNext = pPrev = this;
+      pNext = pPrev = NULL; // added by steve
    }
    Node(const T& data) // COPY -- Jon
    {
