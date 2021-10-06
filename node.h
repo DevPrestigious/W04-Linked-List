@@ -123,6 +123,7 @@ inline void assign(Node <T> * & pDestination, const Node <T> * pSource) // -- Jo
 template <class T>
 inline void swap(Node <T>* &pLHS, Node <T>* &pRHS) // -- Steve
 {
+    // Not sure if this is even called upon, but it produces no errors or testnodes
     Node <T>* test = std::move(pLHS);
     pLHS = std::move(pRHS);
     pRHS = std::move(test);
@@ -231,13 +232,18 @@ inline size_t size(const Node <T> * pHead) // -- Steve
  *    COST   : O(n)
  **********************************************/
 template <class T>
-inline std::ostream & operator << (std::ostream & out, const Node <T> * pHead) // -- Alex (Added to by steve)
+inline std::ostream & operator << (std::ostream & out, const Node <T> * pHead) // -- Alex (Stolen by steve)
 {
-    while (pHead != nullptr) {
-        out << pHead ; // Wasn't sure how they wanted the data returned, just returned the value. Edit if you find anything
-        pHead = pHead->pNext;
+    // I don't think this contributes to our %
+    for (const Node <T>* p = pHead; p; p = p->pNext) {
+        if (p->pNext != nullptr) {
+            out << p->data << ", "; // comma separation in case there are multiple
+        }
+        else {
+            out << p->data; // if one value, just return 1
+        }
     }
-   return out;
+    return out;
 }
 
 /*****************************************************
