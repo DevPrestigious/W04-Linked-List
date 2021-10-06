@@ -166,15 +166,10 @@ inline Node <T> * remove(const Node <T> * pRemove) // -- Alex (Added to by Steve
         pRemove->pPrev->pNext = pRemove->pNext;
 
     if (pRemove->pNext)
-        pRemove->pPrev;
+        pRemove->pNext->pPrev = pRemove->pPrev;
 
-    if (pRemove->pPrev) {
-        pReturn = pRemove->pPrev;
-    }
-    else 
-    {
-        pReturn = pRemove->pNext;
-    }
+    pReturn = pRemove->pPrev ? pRemove->pPrev : pRemove->pNext;
+
     
     delete pRemove;
     return pReturn;
