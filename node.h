@@ -218,16 +218,12 @@ inline size_t size(const Node <T> * pHead) // -- Steve
  *    COST   : O(n)
  **********************************************/
 template <class T>
-inline std::ostream & operator << (std::ostream & out, const Node <T> * pHead) // -- Alex
+inline std::ostream & operator << (std::ostream & out, const Node <T> * pHead) // -- Alex (Stolen by steve haha)
 {
-    //inline friend std::ostream& operator << (std::ostream & out,
-    //    const Complex & rhs)
-    //{
-    //    out << rhs.r;
-    //    if (rhs.i != 0.0)                       // only display the imaginary
-    //        out << " + " << rhs.i << "i";        //    component if non-zero
-    //    return out;                             // return "out"
-    //}
+    while (pHead != nullptr) {
+        out << pHead ; // Wasn't sure how they wanted the data returned, just returned the value. Edit if you find anything
+        pHead = pHead->pNext;
+    }
    return out;
 }
 
