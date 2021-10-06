@@ -249,7 +249,7 @@ inline void clear(Node <T> * & pHead) // -- Steve
         DELETE pDelete*/
 
     Node <T>* pDelete = pHead;
-    while (pHead != nullptr) {
+    while (pHead->pNext != nullptr) {
         pDelete = pHead;
         pHead = pHead->pNext;
         delete pDelete;
