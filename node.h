@@ -200,31 +200,37 @@ inline Node <T> * insert(Node <T> * pCurrent,
 
 
     // THIS LOOKS RIGHT, BUT DOESN'T CHANGE %. FEEL FREE TO EDIT
+    // 1. pNew < -NEW Node(t)
     Node <T>* pNew = new Node <T>(t);
 
     if (pCurrent == NULL)
         return pNew;
 
+    // 2. IF pCurrent != NULL and after = false
     if (!after) 
     {
+        // 3. pNew.pNext <- pCurrent
         pNew->pNext = pCurrent;
+        // 4. pNew.pPrev <- pCurrent.pPrev
         pNew->pPrev = pCurrent->pPrev;
-
-        if (pCurrent->pPrev)
-            pCurrent->pPrev->pNext = pNew;
-
+        // 5. pCurrent.pPrev <- pNew
         pCurrent->pPrev = pNew;
+        // 6. IF pNew.pPrev
+        if (pNew->pPrev)
+            // 7. pNew.pPrev.pNext < -pNew
+            pNew->pPrev->pNext = pNew;
     }
+    // 8. IF pCurrent != NULL and after = true
     else 
     {  
-        pNew->pNext = pCurrent->pNext;
+        // … something similar …
         pNew->pPrev = pCurrent;
-
-        if (pCurrent->pNext)
-            pCurrent->pNext->pPrev = pNew;
+        pNew->pNext = pCurrent->pNext;
         pCurrent->pNext = pNew;
+        if (pNew->pNext)
+            pNew->pNext->pPrev = pNew;
     }
-
+    // 9. RETURN pNew*/
     return pNew;
 }
 
