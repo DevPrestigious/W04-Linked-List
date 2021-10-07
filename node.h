@@ -83,22 +83,21 @@ inline Node <T> * copy(const Node <T> * pSource) // --Alex
 {
     // COPY CONSTRUCTOR
        /*copy(pSource)
-           pDestination <- new Node(pSource.data)
-           pSrc <- pSource
-           pDes <- pDestination
-           FOR pSrc <- pSrc.pNext … end of the list
-           pDes <- insert(pSrc.data, pDes, true)
-           RETURN pDestination*/
+           1. pDestination <- new Node(pSource.data)
+           2. pSrc <- pSource
+           3. pDes <- pDestination
+           4. FOR pSrc <- pSrc.pNext … end of the list
+           5. pDes <- insert(pSrc.data, pDes, true)
+           6. RETURN pDestination*/
 
     if (pSource == NULL)
         return NULL;
 
     Node<T>* pDestination = new Node<T>(pSource->data);
-    Node<T>* pDes = pDestination;
 
-    for (Node <T>* pSrc = pSource->pNext; pSrc != nullptr; pSrc = pSrc->pNext)
+    for (Node <T>* pSrc = pSource->pNext; pSource != nullptr; pSource = pSource->pNext)
     {
-        pDes = insert(pDes, pSrc->data, true);
+        insert(pDestination, pSource->data, true);
     }
 
     return pDestination;
