@@ -98,7 +98,7 @@ inline Node <T> * copy(const Node <T> * pSource) // --Alex
 
     for (Node <T>* pSrc = pSource->pNext; pSrc != nullptr; pSrc = pSrc->pNext)
     {
-        insert(pDes, pSrc->data, true);
+        pDes = insert(pDes, pSrc->data, true);
     }
 
     return pDestination;
