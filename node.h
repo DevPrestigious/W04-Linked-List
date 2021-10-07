@@ -95,9 +95,10 @@ inline Node <T> * copy(const Node <T> * pSource) // --Alex
 
     Node<T>* pDestination = new Node<T>(pSource->data);
 
-    for (pSource->pNext; pSource != nullptr; pSource = pSource->pNext)
+    // This loop accomplishes nothing... 
+    for (Node <T>* pSrc = pSource->pNext; pSrc != nullptr; pSrc = pSrc->pNext)
     {
-        insert(pDestination, pSource->data, true);
+        pDestination = insert(pDestination, pSource->data, true);
     }
 
     return pDestination;
