@@ -187,16 +187,16 @@ inline Node <T> * insert(Node <T> * pCurrent,
                   bool after = false)
 {
     /*insert(t, pCurrent, after)
-        pNew <- NEW Node(t)
-        IF pCurrent != NULLand after = false
-        pNew.pNext <- pCurrent
-        pNew.pPrev <- pCurrent.pPrev
-        pCurrent.pPrev <- pNew
-        IF pNew.pPrev
-        pNew.pPrev.pNext <- pNew
-        IF pCurrent != NULL and after = true
+        1. pNew <- NEW Node(t)
+        2. IF pCurrent != NULL and after = false
+        3. pNew.pNext <- pCurrent
+        4. pNew.pPrev <- pCurrent.pPrev
+        5. pCurrent.pPrev <- pNew
+        6. IF pNew.pPrev
+        7. pNew.pPrev.pNext <- pNew
+        8. IF pCurrent != NULL and after = true
         … something similar …
-        RETURN pNew*/
+        9. RETURN pNew*/
 
 
     // THIS LOOKS RIGHT, BUT DOESN'T CHANGE %. FEEL FREE TO EDIT
@@ -205,17 +205,8 @@ inline Node <T> * insert(Node <T> * pCurrent,
     if (pCurrent == NULL)
         return pNew;
 
-    if (after) 
+    if (!after) 
     {
-        pNew->pNext = pCurrent->pNext;
-        pNew->pPrev = pCurrent;
-
-        if (pCurrent->pNext)
-            pCurrent->pNext->pPrev = pNew;
-        pCurrent->pNext = pNew;
-    }
-    else 
-    {  
         pNew->pNext = pCurrent;
         pNew->pPrev = pCurrent->pPrev;
 
@@ -223,6 +214,15 @@ inline Node <T> * insert(Node <T> * pCurrent,
             pCurrent->pPrev->pNext = pNew;
 
         pCurrent->pPrev = pNew;
+    }
+    else 
+    {  
+        pNew->pNext = pCurrent->pNext;
+        pNew->pPrev = pCurrent;
+
+        if (pCurrent->pNext)
+            pCurrent->pNext->pPrev = pNew;
+        pCurrent->pNext = pNew;
     }
 
     return pNew;
