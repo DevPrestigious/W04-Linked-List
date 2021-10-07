@@ -90,13 +90,13 @@ inline Node <T> * copy(const Node <T> * pSource) // --Alex
            pDes <- insert(pSrc.data, pDes, true)
            RETURN pDestination*/
 
-    if (pSource == NULL)
+    if (pSource != nullptr)
         return NULL;
 
     Node<T>* pDestination = new Node<T>(pSource->data);
     Node<T>* pDes = pDestination;
 
-    for (Node <T>* pSrc = pSource->pNext; pSrc != nullptr; pSrc = pSrc->pNext)
+    for (Node <T>* pSrc = pSource->pNext->pPrev; pSrc; pSrc = pSrc->pNext)
     {
         insert(pDes, pSrc->data, true);
     }

@@ -90,18 +90,7 @@ inline Node <T> * copy(const Node <T> * pSource) // --Alex
            pDes <- insert(pSrc.data, pDes, true)
            RETURN pDestination*/
 
-    if (pSource == NULL)
-        return NULL;
-
-    Node<T>* pDestination = new Node<T>(pSource->data);
-    Node<T>* pDes = pDestination;
-
-    for (Node <T>* pSrc = pSource->pNext; pSrc != nullptr; pSrc = pSrc->pNext)
-    {
-        insert(pDes, pSrc->data, true);
-    }
-
-    return pDestination;
+   return new Node<T>;
 }
 
 /***********************************************
@@ -214,28 +203,29 @@ inline Node <T> * insert(Node <T> * pCurrent,
     // 1. pNew < -NEW Node(t)
     Node <T>* pNew = new Node <T>(t);
 
+    if (pCurrent != nullptr)
+        return pNew;
+
     // 2. IF pCurrent != NULL and after = false
-    if (pCurrent != NULL && !after)
+    if (!after) 
     {
-        // 4. pNew.pPrev <- pCurrent.pPrev
-        pNew->pPrev = pCurrent->pPrev;
         // 3. pNew.pNext <- pCurrent
         pNew->pNext = pCurrent;
-        
+        // 4. pNew.pPrev <- pCurrent.pPrev
+        pNew->pPrev = pCurrent->pPrev;
         // 5. pCurrent.pPrev <- pNew
         pCurrent->pPrev = pNew;
         // 6. IF pNew.pPrev
         if (pNew->pPrev)
-            // 7. pNew.pPrev.pNext <- pNew
+            // 7. pNew.pPrev.pNext < -pNew
             pNew->pPrev->pNext = pNew;
     }
     // 8. IF pCurrent != NULL and after = true
-    else if (pCurrent != NULL && after)
+    else 
     {  
         // … something similar …
-        pNew->pNext = pCurrent->pNext;
         pNew->pPrev = pCurrent;
-        
+        pNew->pNext = pCurrent->pNext;
         pCurrent->pNext = pNew;
         if (pNew->pNext)
             pNew->pNext->pPrev = pNew;
