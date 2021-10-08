@@ -115,19 +115,18 @@ template <class T>
 inline void assign(Node <T>*& pDestination, const Node <T>* pSource) // -- Jon
 {
     
-      /*pSrc <- pSource
+    /*pSrc <- pSource
         pDes <- pDestination
         WHILE pSrc != NULL AND pDes != NULL
             pDes.data <- pSrc.data
             pDes <- pDes.pNext
             pSrc <- pSrc.pNext*/
     auto pDes = pDestination;
-    auto pSrc = pSource;
 
     /*if (pSource == NULL)
         return;*/
 
-    while (pSrc != NULL && pDes != NULL)
+    for (auto pSrc = pSource->pNext; pSrc != nullptr && pDes != nullptr; )
     {
         //pDes.data <- pSrc.data
         pDes->data = pSrc->data;
@@ -141,11 +140,11 @@ inline void assign(Node <T>*& pDestination, const Node <T>* pSource) // -- Jon
                 IF pDestination = NULL
                     pDestination <- pDes
         */
-        if (pSrc != NULL) {
+        if (pSrc != nullptr) {
             pDes = pDes->pPrev;
-            while (pSrc != NULL) {
+            while (pSrc != nullptr) {
                 pDes = insert(pDes, pSrc->data, true);
-                if (pDestination != NULL) {
+                if (pDestination != nullptr) {
                     pDestination = pDes;
                 }
             }
@@ -159,15 +158,15 @@ inline void assign(Node <T>*& pDestination, const Node <T>* pSource) // -- Jon
                  IF setToNull
                     pDestination <- NULL*/
             bool setToNull = false;
-            if (pDes->pPrev != NULL) {
-                pDes->pPrev->pNext = NULL;
+            if (pDes->pPrev != nullptr) { 
+                pDes->pPrev->pNext = nullptr; 
             }
             else { 
                 setToNull = true; 
             }
             
             if (setToNull) {
-                pDestination = NULL;
+                pDestination = nullptr;
             }
 
         }

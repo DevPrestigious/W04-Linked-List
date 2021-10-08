@@ -142,13 +142,13 @@ inline void assign(Node <T>*& pDestination, const Node <T>* pSource) // -- Jon
                     pDestination <- pDes
         */
         if (pSrc != NULL) {
-            pDes = pDes->pPrev;
+            /*pDes = pDes->pPrev;
             while (pSrc != NULL) {
                 pDes = insert(pDes, pSrc->data, true);
                 if (pDestination != NULL) {
                     pDestination = pDes;
                 }
-            }
+            }*/
             /*IF pSrc != NULL
                  setToNull <- FALSE
                  IF pDes.pRev != NULL
