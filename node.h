@@ -155,6 +155,7 @@ inline void assign(Node <T>*& pDestination, const Node <T>* pSource) // -- Jon
                 if (pDestination != NULL) {
                     pDestination = pDes;
                 }
+                pSrc = pSrc->pNext;
             }
             /*IF pSrc != NULL
                 setToNull <- FALSE
