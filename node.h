@@ -170,7 +170,7 @@ inline void assign(Node <T>*& pDestination, const Node <T>* pSource) // -- Jon
         }
         /*if (setToNull)
             pDestination = NULL;*/
-    //}
+    }
     }
     
 }
