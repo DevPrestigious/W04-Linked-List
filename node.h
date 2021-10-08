@@ -52,8 +52,8 @@ public:
              data <- t
              pNext <- NULL
              pPrev <- NULL*/
-
-      pNext = pPrev = NULL;
+      
+        pNext = pPrev = NULL;
    }
 
    Node(T&& data) // MOVE -- Steve
@@ -81,7 +81,7 @@ public:
 template <class T>
 inline Node <T> * copy(const Node <T> * pSource) // --Alex
 {
-    // COPY CONSTRUCTOR
+    // COPY
        /*copy(pSource)
            1. pDestination <- new Node(pSource.data)
            2. pSrc <- pSource
@@ -239,6 +239,7 @@ inline Node <T> * insert(Node <T> * pCurrent,
         pCurrent->pNext = pNew;
         if (pNew->pNext)
             pNew->pNext->pPrev = pNew;
+
     }
     // 9. RETURN pNew*/
     return pNew;
