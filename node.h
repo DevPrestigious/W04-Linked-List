@@ -81,7 +81,7 @@ public:
  *   COST   : O(n)
  **********************************************/
 template <class T>
-inline Node <T> * copy(const Node <T> * pSource) // --Alex
+inline Node <T> * copy(const Node <T> * pSource)
 {
     // COPY
        /*copy(pSource)
@@ -115,22 +115,21 @@ inline Node <T> * copy(const Node <T> * pSource) // --Alex
  *   COST   : O(n)
  **********************************************/
 template <class T>
-inline void assign(Node <T>*& pDestination, const Node <T>* pSource) // -- Jon
+inline void assign(Node <T>*& pDestination, const Node <T>* pSource)
 {
     
-      /*pSrc <- pSource
-        pDes <- pDestination
-        WHILE pSrc != NULL AND pDes != NULL
-            pDes.data <- pSrc.data
-            pDes <- pDes.pNext
-            pSrc <- pSrc.pNext*/
+  /*pSrc <- pSource
+    pDes <- pDestination
+    WHILE pSrc != NULL AND pDes != NULL
+         pDes.data <- pSrc.data
+         pDes <- pDes.pNext
+         pSrc <- pSrc.pNext*/
     auto pDes = pDestination;
     auto pSrc = pSource;
 
     while (pSrc != NULL && pDes != NULL)
     {
-        // ...We will accomplish this by maintaining a pDesPrevious pointer. (page 92 of book)
-        auto pDesPrevious = pDes; // made sense to set it above the increment, otherwise, what's the point?
+        
 
         //pDes.data <- pSrc.data
         pDes->data = pSrc->data;
@@ -144,17 +143,22 @@ inline void assign(Node <T>*& pDestination, const Node <T>* pSource) // -- Jon
                 IF pDestination = NULL
                     pDestination <- pDes
         */
+        // ...We will accomplish this by maintaining a pDesPrevious pointer. (page 92 of book)
+        auto pDesPrevious = pDes; 
+        auto pSrcPrevious = pSrc;
         
         if (pSrc != NULL) {
             pDes = pDesPrevious;
-            while (pSrc != NULL) { // INFINITE LOOP
+            while (pSrc != NULL) {
                 pDes = insert(pDes, pSrc->data, true);
-                if (pDestination != NULL) 
+                if (pDestination == NULL)
                 {
                     pDestination = pDes;
                 }
                 pSrc = pSrc->pNext;
             }
+            pSrc = pSrcPrevious;
+        }
             /*IF pSrc != NULL
                 setToNull <- FALSE
                 IF pDes.pRev != NULL
@@ -165,8 +169,9 @@ inline void assign(Node <T>*& pDestination, const Node <T>* pSource) // -- Jon
                 IF setToNull
                 pDestination <- NULL
             */
-
+        if (pSrc != NULL) {
             bool setToNull = false;
+
             if (pDes->pPrev != NULL) 
             {
                 pDes->pPrev->pNext = NULL;
@@ -175,6 +180,7 @@ inline void assign(Node <T>*& pDestination, const Node <T>* pSource) // -- Jon
             {
                 setToNull = true;
             }
+            clear(pDes);
 
             if (setToNull) 
             {
@@ -190,7 +196,7 @@ inline void assign(Node <T>*& pDestination, const Node <T>* pSource) // -- Jon
  *   COST   : O(1)
  **********************************************/
 template <class T>
-inline void swap(Node <T>* &pLHS, Node <T>* &pRHS) // -- Steve
+inline void swap(Node <T>* &pLHS, Node <T>* &pRHS)
 {
     // Not sure if this is even called upon, but it produces no errors or testnodes
     Node <T>* test = std::move(pLHS);
@@ -206,7 +212,7 @@ inline void swap(Node <T>* &pLHS, Node <T>* &pRHS) // -- Steve
  *   COST   : O(1)
  **********************************************/
 template <class T>
-inline Node <T> * remove(const Node <T> * pRemove) // -- Alex (Stolen by Steve)
+inline Node <T> * remove(const Node <T> * pRemove)
 {
     /*remove(pRemove)
         IF NULL = pRemove
@@ -250,7 +256,7 @@ inline Node <T> * remove(const Node <T> * pRemove) // -- Alex (Stolen by Steve)
  *   OUTPUT  : return the newly inserted item
  *   COST    : O(1)
  **********************************************/
-template <class T> // -- Jon -- (Added to by Steve)
+template <class T>
 inline Node <T> * insert(Node <T> * pCurrent,
                   const T & t,
                   bool after = false)
@@ -313,7 +319,7 @@ inline Node <T> * insert(Node <T> * pCurrent,
  *  COST    : O(n)
  ********************************************************/
 template <class T>
-inline size_t size(const Node <T> * pHead) // -- Steve
+inline size_t size(const Node <T> * pHead)
 {
     //size(pHead)
     //    IF pHead = NULL
@@ -335,7 +341,7 @@ inline size_t size(const Node <T> * pHead) // -- Steve
  *    COST   : O(n)
  **********************************************/
 template <class T>
-inline std::ostream & operator << (std::ostream & out, const Node <T> * pHead) // -- Alex (Stolen by steve)
+inline std::ostream & operator << (std::ostream & out, const Node <T> * pHead)
 {
     // I don't think this contributes to our %
     for (auto p = pHead; p; p = p->pNext) {
@@ -357,7 +363,7 @@ inline std::ostream & operator << (std::ostream & out, const Node <T> * pHead) /
  *   COST    : O(n)
  ****************************************************/
 template <class T>
-inline void clear(Node <T> * & pHead) // -- Steve
+inline void clear(Node <T> * & pHead)
 {
     /*clear(pHead)
         WHILE pHead != NULL
