@@ -115,6 +115,37 @@ inline Node <T> * copy(const Node <T> * pSource) // --Alex
 template <class T>
 inline void assign(Node <T>*& pDestination, const Node <T>* pSource) // -- Jon
 {
+    // ASSIGN NEEDS TO BE DONE IN A THREE STEP PROCESS!!!!!!!!!!!!!!//
+    
+    /*pSrc <- pSource
+        pDes <- pDestination
+        WHILE pSrc ≠ NULL AND pDest ≠ NULL
+        pDes.data <- pSrc.data
+        pDes <- pDes.pNext
+        pSrc <- pSrc.pNext*/
+    const Node <T>* pSrc = pSource;
+    Node <T>* pDes = pDestination;
+
+    while (pSrc != NULL && pDes != NULL)
+    {
+        pDes->data = pSrc->data;
+        pDes = pDes->pNext;
+        pSrc = pSrc->pNext
+
+
+            /*IF pSrc ≠ NULL
+                pDes <- pDesPrevious
+                WHILE pSrc ≠ NULL
+                pDes <- insert(pDes, pSrc.data, TRUE)
+                IF pDestination = NULL
+                pDestination <- pDes*/
+            if (pSrc != NULL) {
+
+            }
+
+    
+    
+    
     /*IF pSrc ≠ NULL
         setToNull <- FALSE
         IF pDes.pRev != NULL
@@ -126,14 +157,19 @@ inline void assign(Node <T>*& pDestination, const Node <T>* pSource) // -- Jon
         pDestination <- NULL*/
     if (pSrc != NULL)
     {
-        setToNull = false;
-        if (pDes.pRev != NULL)
-            pDes.pPrev.pNext = NULL;
+        /*setToNull = false;*/
+        if (pDes->pPrev != NULL)
+        {
+            pDes->pPrev->pNext = NULL;
+        }
         else
-            setToNull = true;
-            freeData(pDes);
-        if (setToNull)
-            pDestination = NULL;
+        {
+            /*setToNull = true;*/
+            clear(pDes);
+        }
+        /*if (setToNull)
+            pDestination = NULL;*/
+    }
     }
 }
 
