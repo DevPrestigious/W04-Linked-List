@@ -127,9 +127,6 @@ inline void assign(Node <T>*& pDestination, const Node <T>* pSource) // -- Jon
     auto pDes = pDestination;
     auto pSrc = pSource;
 
-    /*if (pSource == NULL)
-        return;*/
-
     while (pSrc != NULL && pDes != NULL)
     {
         // ...We will accomplish this by maintaining a pDesPrevious pointer. (page 92 of book)
@@ -152,7 +149,8 @@ inline void assign(Node <T>*& pDestination, const Node <T>* pSource) // -- Jon
             pDes = pDesPrevious;
             while (pSrc != NULL) { // INFINITE LOOP
                 pDes = insert(pDes, pSrc->data, true);
-                if (pDestination != NULL) {
+                if (pDestination != NULL) 
+                {
                     pDestination = pDes;
                 }
                 pSrc = pSrc->pNext;
@@ -169,14 +167,17 @@ inline void assign(Node <T>*& pDestination, const Node <T>* pSource) // -- Jon
             */
 
             bool setToNull = false;
-            if (pDes->pPrev != NULL) {
+            if (pDes->pPrev != NULL) 
+            {
                 pDes->pPrev->pNext = NULL;
             }
-            else {
+            else 
+            {
                 setToNull = true;
             }
 
-            if (setToNull) {
+            if (setToNull) 
+            {
                 pDestination = NULL;
             }
         }
