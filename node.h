@@ -43,7 +43,8 @@ public:
            data <- T()
            pNext <- NULL
            pPrev <- NULL*/
-      pNext = pPrev = NULL; // added by steve
+       data = T();
+       pNext = pPrev = NULL; // added by steve
    }
    Node(const T& data) // COPY -- Jon
    {
@@ -52,13 +53,13 @@ public:
              data <- t
              pNext <- NULL
              pPrev <- NULL*/
-      
-        pNext = pPrev = NULL;
+       this->data = data;
+       pNext = pPrev = NULL;
    }
 
    Node(T&& data) // MOVE -- Steve
    {
-       this->data = data;
+       this->data = std::move(data);
    }
 
    //
@@ -113,8 +114,39 @@ inline Node <T> * copy(const Node <T> * pSource) // --Alex
  *   COST   : O(n)
  **********************************************/
 template <class T>
-inline void assign(Node <T> * & pDestination, const Node <T> * pSource) // -- Jon
+inline void assign(Node <T>*& pDestination, const Node <T>* pSource) // -- Jon
 {
+    // ASSIGN NEEDS TO BE DONE IN A THREE STEP PROCESS!!!!!!!!!!!!!!//
+    
+    /*pSrc <- pSource
+        pDes <- pDestination
+        WHILE pSrc ≠ NULL AND pDest ≠ NULL
+        pDes.data <- pSrc.data
+        pDes <- pDes.pNext
+        pSrc <- pSrc.pNext*/
+    const Node <T>* pSrc = pSource;
+    Node <T>* pDes = pDestination;
+
+    while (pSrc != NULL && pDes != NULL)
+    {
+        pDes->data = pSrc->data;
+        pDes = pDes->pNext;
+        pSrc = pSrc->pNext
+
+
+            /*IF pSrc ≠ NULL
+                pDes <- pDesPrevious
+                WHILE pSrc ≠ NULL
+                pDes <- insert(pDes, pSrc.data, TRUE)
+                IF pDestination = NULL
+                pDestination <- pDes*/
+            if (pSrc != NULL) {
+
+            }
+
+    
+    
+    
     /*IF pSrc ≠ NULL
         setToNull <- FALSE
         IF pDes.pRev != NULL
@@ -123,7 +155,24 @@ inline void assign(Node <T> * & pDestination, const Node <T> * pSource) // -- Jo
         setToNull <- TRUE
         freeData(pDes)
         IF setToNull
-        pDestination <- NULL*/
+        pDestination <- NULL
+    if (pSrc != NULL)
+    {
+        /*setToNull = false;*/
+        if (pDes->pPrev != NULL)
+        {
+            pDes->pPrev->pNext = NULL;
+        }
+        else
+        {
+            /*setToNull = true;*/
+            clear(pDes);
+        }
+        /*if (setToNull)
+            pDestination = NULL;*/
+    }
+    }
+    */
 }
 
 /***********************************************
