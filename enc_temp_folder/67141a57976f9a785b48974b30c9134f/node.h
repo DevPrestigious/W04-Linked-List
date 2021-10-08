@@ -83,25 +83,14 @@ inline Node <T> * copy(const Node <T> * pSource) // --Alex
 {
     // COPY CONSTRUCTOR
        /*copy(pSource)
-           1. pDestination <- new Node(pSource.data)
-           2. pSrc <- pSource
-           3. pDes <- pDestination
-           4. FOR pSrc <- pSrc.pNext … end of the list
-           5. pDes <- insert(pSrc.data, pDes, true)
-           6. RETURN pDestination*/
+           pDestination <- new Node(pSource.data)
+           pSrc <- pSource
+           pDes <- pDestination
+           FOR pSrc <- pSrc.pNext … end of the list
+           pDes <- insert(pSrc.data, pDes, true)
+           RETURN pDestination*/
 
-    if (pSource == NULL)
-        return NULL;
-
-    Node<T>* pDestination = new Node<T>(pSource->data);
-
-    // This loop accomplishes nothing... 
-    for (Node <T>* pSrc = pSource->pNext; pSrc != nullptr; pSrc = pSrc->pNext)
-    {
-        pDestination = insert(pDestination, pSource->data, true);
-    }
-
-    return pDestination;
+   return new Node<T>;
 }
 
 /***********************************************
@@ -113,7 +102,7 @@ inline Node <T> * copy(const Node <T> * pSource) // --Alex
  *   COST   : O(n)
  **********************************************/
 template <class T>
-inline void assign(Node <T>*& pDestination, const Node <T>* pSource) // -- Jon
+inline void assign(Node <T> * & pDestination, const Node <T> * pSource) // -- Jon
 {
     /*IF pSrc ≠ NULL
         setToNull <- FALSE
@@ -124,17 +113,6 @@ inline void assign(Node <T>*& pDestination, const Node <T>* pSource) // -- Jon
         freeData(pDes)
         IF setToNull
         pDestination <- NULL*/
-    if (pSrc != NULL)
-    {
-        setToNull = false;
-        if (pDes.pRev != NULL)
-            pDes.pPrev.pNext = NULL;
-        else
-            setToNull = true;
-            freeData(pDes);
-        if (setToNull)
-            pDestination = NULL;
-    }
 }
 
 /***********************************************
@@ -225,28 +203,29 @@ inline Node <T> * insert(Node <T> * pCurrent,
     // 1. pNew < -NEW Node(t)
     Node <T>* pNew = new Node <T>(t);
 
+    if (pCurrent != nullptr)
+        return pNew;
+
     // 2. IF pCurrent != NULL and after = false
-    if (pCurrent != NULL && !after)
+    if (!after) 
     {
-        // 4. pNew.pPrev <- pCurrent.pPrev
-        pNew->pPrev = pCurrent->pPrev;
         // 3. pNew.pNext <- pCurrent
         pNew->pNext = pCurrent;
-        
+        // 4. pNew.pPrev <- pCurrent.pPrev
+        pNew->pPrev = pCurrent->pPrev;
         // 5. pCurrent.pPrev <- pNew
         pCurrent->pPrev = pNew;
         // 6. IF pNew.pPrev
         if (pNew->pPrev)
-            // 7. pNew.pPrev.pNext <- pNew
+            // 7. pNew.pPrev.pNext < -pNew
             pNew->pPrev->pNext = pNew;
     }
     // 8. IF pCurrent != NULL and after = true
-    else if (pCurrent != NULL && after)
+    else 
     {  
         // … something similar …
-        pNew->pNext = pCurrent->pNext;
         pNew->pPrev = pCurrent;
-        
+        pNew->pNext = pCurrent->pNext;
         pCurrent->pNext = pNew;
         if (pNew->pNext)
             pNew->pNext->pPrev = pNew;

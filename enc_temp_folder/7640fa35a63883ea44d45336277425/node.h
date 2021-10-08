@@ -83,22 +83,22 @@ inline Node <T> * copy(const Node <T> * pSource) // --Alex
 {
     // COPY CONSTRUCTOR
        /*copy(pSource)
-           1. pDestination <- new Node(pSource.data)
-           2. pSrc <- pSource
-           3. pDes <- pDestination
-           4. FOR pSrc <- pSrc.pNext … end of the list
-           5. pDes <- insert(pSrc.data, pDes, true)
-           6. RETURN pDestination*/
+           pDestination <- new Node(pSource.data)
+           pSrc <- pSource
+           pDes <- pDestination
+           FOR pSrc <- pSrc.pNext … end of the list
+           pDes <- insert(pSrc.data, pDes, true)
+           RETURN pDestination*/
 
-    if (pSource == NULL)
+    if (pSource->pNext == nullptr)
         return NULL;
 
     Node<T>* pDestination = new Node<T>(pSource->data);
+    Node<T>* pDes = pDestination;
 
-    // This loop accomplishes nothing... 
     for (Node <T>* pSrc = pSource->pNext; pSrc != nullptr; pSrc = pSrc->pNext)
     {
-        pDestination = insert(pDestination, pSource->data, true);
+        insert(pDes, pSrc->data, true);
     }
 
     return pDestination;
@@ -113,7 +113,7 @@ inline Node <T> * copy(const Node <T> * pSource) // --Alex
  *   COST   : O(n)
  **********************************************/
 template <class T>
-inline void assign(Node <T>*& pDestination, const Node <T>* pSource) // -- Jon
+inline void assign(Node <T> * & pDestination, const Node <T> * pSource) // -- Jon
 {
     /*IF pSrc ≠ NULL
         setToNull <- FALSE
@@ -124,17 +124,6 @@ inline void assign(Node <T>*& pDestination, const Node <T>* pSource) // -- Jon
         freeData(pDes)
         IF setToNull
         pDestination <- NULL*/
-    if (pSrc != NULL)
-    {
-        setToNull = false;
-        if (pDes.pRev != NULL)
-            pDes.pPrev.pNext = NULL;
-        else
-            setToNull = true;
-            freeData(pDes);
-        if (setToNull)
-            pDestination = NULL;
-    }
 }
 
 /***********************************************
