@@ -272,7 +272,7 @@ inline Node <T> * insert(Node <T> * pCurrent,
         … something similar …
         9. RETURN pNew*/
 
-    // 1. pNew < -NEW Node(t)
+    // 1. pNew <- NEW Node(t)
     Node <T>* pNew = new Node <T>(t);
 
     // 2. IF pCurrent != NULL and after = false
