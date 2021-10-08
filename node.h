@@ -43,7 +43,8 @@ public:
            data <- T()
            pNext <- NULL
            pPrev <- NULL*/
-      pNext = pPrev = NULL; // added by steve
+       data = T();
+       pNext = pPrev = NULL; // added by steve
    }
    Node(const T& data) // COPY -- Jon
    {
@@ -52,13 +53,13 @@ public:
              data <- t
              pNext <- NULL
              pPrev <- NULL*/
-
-      pNext = pPrev = NULL;
+       this->data = data;
+       pNext = pPrev = NULL;
    }
 
    Node(T&& data) // MOVE -- Steve
    {
-       this->data = data;
+       this->data = std::move(data);
    }
 
    //
@@ -123,7 +124,7 @@ inline void assign(Node <T>*& pDestination, const Node <T>* pSource) // -- Jon
         setToNull <- TRUE
         freeData(pDes)
         IF setToNull
-        pDestination <- NULL*/
+        pDestination <- NULL
     if (pSrc != NULL)
     {
         setToNull = false;
@@ -135,6 +136,7 @@ inline void assign(Node <T>*& pDestination, const Node <T>* pSource) // -- Jon
         if (setToNull)
             pDestination = NULL;
     }
+    */
 }
 
 /***********************************************
