@@ -102,7 +102,7 @@ inline Node <T> * copy(const Node <T> * pSource) // --Alex
  *   COST   : O(n)
  **********************************************/
 template <class T>
-inline void assign(Node <T> * & pDestination, const Node <T> * pSource) // -- Jon
+inline void assign(Node <T>*& pDestination, const Node <T>* pSource) // -- Jon
 {
     /*IF pSrc ≠ NULL
         setToNull <- FALSE
@@ -113,6 +113,17 @@ inline void assign(Node <T> * & pDestination, const Node <T> * pSource) // -- Jo
         freeData(pDes)
         IF setToNull
         pDestination <- NULL*/
+    if (pSrc != NULL)
+    {
+        setToNull = false;
+        if (pDes.pRev != NULL)
+            pDes.pPrev.pNext = NULL;
+        else
+            setToNull = true;
+            freeData(pDes);
+        if (setToNull)
+            pDestination = NULL;
+    }
 }
 
 /***********************************************
