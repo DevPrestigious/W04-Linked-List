@@ -147,30 +147,30 @@ inline void assign(Node <T>*& pDestination, const Node <T>* pSource) // -- Jon
     
     
     
-    /*IF pSrc ≠ NULL
-        setToNull <- FALSE
-        IF pDes.pRev != NULL
-        pDEs.pPrev.pNext <- NULL
-        ELSE
-        setToNull <- TRUE
-        freeData(pDes)
-        IF setToNull
-        pDestination <- NULL*/
-    if (pSrc != NULL)
-    {
-        /*setToNull = false;*/
-        if (pDes->pPrev != NULL)
+        /*IF pSrc ≠ NULL
+            setToNull <- FALSE
+            IF pDes.pRev != NULL
+            pDEs.pPrev.pNext <- NULL
+            ELSE
+            setToNull <- TRUE
+            freeData(pDes)
+            IF setToNull
+            pDestination <- NULL*/
+        if (pSrc != NULL)
         {
-            pDes->pPrev->pNext = NULL;
+            /*setToNull = false;*/
+            if (pDes->pPrev != NULL)
+            {
+                pDes->pPrev->pNext = NULL;
+            }
+            else
+            {
+                /*setToNull = true;*/
+                clear(pDes);
+            }
+            /*if (setToNull)
+                pDestination = NULL;*/
         }
-        else
-        {
-            /*setToNull = true;*/
-            clear(pDes);
-        }
-        /*if (setToNull)
-            pDestination = NULL;*/
-    }
     }
     
 }
