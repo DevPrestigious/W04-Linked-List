@@ -53,7 +53,11 @@ public:
              data <- t
              pNext <- NULL
              pPrev <- NULL*/
-       //this->data = insert(this->data, data, true);
+       /*for (; data != nullptr; data = data->pNext)
+       {*/
+           *this = data;
+       //}
+       //this->data = std::move(data);
        pNext = pPrev = NULL;
    }
 
@@ -92,15 +96,17 @@ inline Node <T> * copy(const Node <T> * pSource) // --Alex
            6. RETURN pDestination*/
 
     if (pSource == NULL)
-        return nullptr;
+        return NULL;
 
-    auto pDes = new Node<T>(pSource->data);
+    Node<T>* pDestination = new Node<T>(pSource->data);
 
-    for (auto pSrc = pSource->pNext; pSrc; pSrc = pSrc->pNext) {
-        pDes = insert(pDes, pSrc->data, true);
+    // This loop accomplishes nothing... 
+    for (Node <T>* pSrc = pSource->pNext; pSrc != nullptr; pSrc = pSrc->pNext)
+    {
+        pDestination = insert(pDestination, pSource->data, true);
     }
 
-    return pDes;
+    return pDestination;
 }
 
 /***********************************************
@@ -114,55 +120,58 @@ inline Node <T> * copy(const Node <T> * pSource) // --Alex
 template <class T>
 inline void assign(Node <T>*& pDestination, const Node <T>* pSource) // -- Jon
 {
+    // ASSIGN NEEDS TO BE DONE IN A THREE STEP PROCESS!!!!!!!!!!!!!!//
     
     /*pSrc <- pSource
         pDes <- pDestination
-        WHILE pSrc != NULL AND pDes != NULL
-            pDes.data <- pSrc.data
-            pDes <- pDes.pNext
-            pSrc <- pSrc.pNext*/
-    auto pDes = pDestination;
+        WHILE pSrc ≠ NULL AND pDest ≠ NULL
+        pDes.data <- pSrc.data
+        pDes <- pDes.pNext
+        pSrc <- pSrc.pNext*/
+    //Node <T>* pSrc = pSource;
+    Node <T>* pDes = pDestination;
 
-    if (pSource == NULL)
-        return;
-
-    for (auto pSrc = pSource->pNext; pSrc != nullptr && pDes != nullptr; )
+    for (Node <T>* pSrc = pSource->pNext; pSrc != nullptr; pSrc = pSrc->pNext)
     {
-        //pDes.data <- pSrc.data
         pDes->data = pSrc->data;
         pDes = pDes->pNext;
-        pSrc = pSrc->pNext;
+        //pSrc = pSrc->pNext;
 
-        /*IF pSrc != NULL
-             pDes <- pDesPrevious
-             WHILE pSrc != NULL
+
+            /*IF pSrc ≠ NULL
+                pDes <- pDesPrevious
+                WHILE pSrc ≠ NULL
                 pDes <- insert(pDes, pSrc.data, TRUE)
                 IF pDestination = NULL
-                    pDestination <- pDes
-        */
-        if (pSrc != nullptr) {
-            pDes = pDes->pPrev;
-            while (pSrc != nullptr) {
-                pDes = insert(pDes, pSrc->data, true);
-                if (pDestination != nullptr)
-                    pDestination = pDes;
-            }
-            /*IF pSrc != NULL
-                 setToNull <- FALSE
-                 IF pDes.pRev != NULL
-                    pDes.pPrev.pNext <- NULL
-                 ELSE
-                    setToNull <- TRUE
-                 freeData(pDes)
-                 IF setToNull
-                    pDestination <- NULL*/
-            bool setToNull = false;
-            if (pDes->pPrev != nullptr) pDes->pPrev->pNext = nullptr;
-            else  setToNull = true;
-            
-            if (setToNull)
-                pDestination = nullptr;
+                pDestination <- pDes*/
+            if (pSrc != NULL) {
 
+            }
+
+    
+        /*IF pSrc ≠ NULL
+            setToNull <- FALSE
+            IF pDes.pRev != NULL
+            pDEs.pPrev.pNext <- NULL
+            ELSE
+            setToNull <- TRUE
+            freeData(pDes)
+            IF setToNull
+            pDestination <- NULL*/
+        if (pSrc != NULL)
+        {
+            /*setToNull = false;*/
+            if (pDes->pPrev != NULL)
+            {
+                pDes->pPrev->pNext = NULL;
+            }
+            else
+            {
+                /*setToNull = true;*/
+                clear(pDes);
+            }
+            /*if (setToNull)
+                pDestination = NULL;*/
         }
     }
     
