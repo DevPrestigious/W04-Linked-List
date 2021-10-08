@@ -129,6 +129,9 @@ inline void assign(Node <T>*& pDestination, const Node <T>* pSource) // -- Jon
 
     while (pSrc != NULL && pDes != NULL)
     {
+        // ...We will accomplish this by maintaining a pDesPrevious pointer. (page 92 of book)
+        auto pDesPrevious = pDes; // made sense to set it above the increment, otherwise, what's the point?
+
         //pDes.data <- pSrc.data
         pDes->data = pSrc->data;
         pDes = pDes->pNext;
@@ -141,38 +144,40 @@ inline void assign(Node <T>*& pDestination, const Node <T>* pSource) // -- Jon
                 IF pDestination = NULL
                     pDestination <- pDes
         */
+        
         if (pSrc != NULL) {
-            pDes = pDes->pPrev;
-            while (pSrc != NULL) {
+            pDes = pDesPrevious;
+            while (pSrc != NULL) { // INFINITE LOOP
                 pDes = insert(pDes, pSrc->data, true);
                 if (pDestination != NULL) {
                     pDestination = pDes;
                 }
             }
-            /*IF pSrc != NULL
-                 setToNull <- FALSE
-                 IF pDes.pRev != NULL
-                    pDes.pPrev.pNext <- NULL
-                 ELSE
-                    setToNull <- TRUE
-                 freeData(pDes)
-                 IF setToNull
-                    pDestination <- NULL*/
+        }
+        /*IF pSrc != NULL
+            setToNull <- FALSE
+            IF pDes.pRev != NULL
+            pDes.pPrev.pNext <- NULL
+            ELSE
+            setToNull <- TRUE
+            freeData(pDes)
+            IF setToNull
+            pDestination <- NULL*/
+        // probably redundant to separate from prev if statement, but the while loop makes me wonder
+        if (pSrc != NULL) {
             bool setToNull = false;
             if (pDes->pPrev != NULL) {
                 pDes->pPrev->pNext = NULL;
             }
-            else { 
-                setToNull = true; 
+            else {
+                setToNull = true;
             }
-            
+
             if (setToNull) {
                 pDestination = NULL;
             }
-
         }
     }
-    
 }
 
 /***********************************************
@@ -329,7 +334,7 @@ template <class T>
 inline std::ostream & operator << (std::ostream & out, const Node <T> * pHead) // -- Alex (Stolen by steve)
 {
     // I don't think this contributes to our %
-    for (const Node <T>* p = pHead; p; p = p->pNext) {
+    for (auto p = pHead; p; p = p->pNext) {
         if (p->pNext != nullptr) {
             out << p->data << ", "; // comma separation in case there are multiple
         }
