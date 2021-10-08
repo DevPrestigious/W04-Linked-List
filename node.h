@@ -131,7 +131,7 @@ inline void assign(Node <T>*& pDestination, const Node <T>* pSource) // -- Jon
     {
         pDes->data = pSrc->data;
         pDes = pDes->pNext;
-        pSrc = pSrc->pNext
+        pSrc = pSrc->pNext;
 
 
             /*IF pSrc ≠ NULL
@@ -155,7 +155,7 @@ inline void assign(Node <T>*& pDestination, const Node <T>* pSource) // -- Jon
         setToNull <- TRUE
         freeData(pDes)
         IF setToNull
-        pDestination <- NULL
+        pDestination <- NULL*/
     if (pSrc != NULL)
     {
         /*setToNull = false;*/
@@ -172,7 +172,7 @@ inline void assign(Node <T>*& pDestination, const Node <T>* pSource) // -- Jon
             pDestination = NULL;*/
     }
     }
-    */
+    
 }
 
 /***********************************************
