@@ -54,6 +54,7 @@ public:
              pNext <- NULL
              pPrev <- NULL*/
        //this->data = insert(this->data, data, true);
+       this->data = std::move(data);
        pNext = pPrev = NULL;
    }
 
@@ -94,9 +95,11 @@ inline Node <T> * copy(const Node <T> * pSource) // --Alex
     if (pSource == NULL)
         return nullptr;
 
-    auto pDes = new Node<T>(pSource->data);
+    auto pDestination = new Node<T>(pSource->data);
+    auto pSrc = pSource;
+    auto pDes = pDestination;
 
-    for (auto pSrc = pSource->pNext; pSrc; pSrc = pSrc->pNext) {
+    for (; pSrc; pSrc = pSrc->pNext) {
         pDes = insert(pDes, pSrc->data, true);
     }
 
@@ -153,18 +156,17 @@ inline void assign(Node <T>*& pDestination, const Node <T>* pSource) // -- Jon
                     pDestination = pDes;
                 }
             }
-        }
-        /*IF pSrc != NULL
-            setToNull <- FALSE
-            IF pDes.pRev != NULL
-            pDes.pPrev.pNext <- NULL
-            ELSE
-            setToNull <- TRUE
-            freeData(pDes)
-            IF setToNull
-            pDestination <- NULL*/
-        // probably redundant to separate from prev if statement, but the while loop makes me wonder
-        if (pSrc != NULL) {
+            /*IF pSrc != NULL
+                setToNull <- FALSE
+                IF pDes.pRev != NULL
+                pDes.pPrev.pNext <- NULL
+                ELSE
+                setToNull <- TRUE
+                freeData(pDes)
+                IF setToNull
+                pDestination <- NULL
+            */
+
             bool setToNull = false;
             if (pDes->pPrev != NULL) {
                 pDes->pPrev->pNext = NULL;
