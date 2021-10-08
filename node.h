@@ -53,7 +53,6 @@ public:
              data <- t
              pNext <- NULL
              pPrev <- NULL*/
-       //this->data = insert(this->data, data, true);
        this->data = std::move(data);
        pNext = pPrev = NULL;
    }
@@ -273,8 +272,6 @@ inline Node <T> * insert(Node <T> * pCurrent,
         … something similar …
         9. RETURN pNew*/
 
-
-    // THIS LOOKS RIGHT, BUT DOESN'T CHANGE %. FEEL FREE TO EDIT
     // 1. pNew < -NEW Node(t)
     Node <T>* pNew = new Node <T>(t);
 
