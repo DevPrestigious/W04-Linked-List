@@ -131,7 +131,7 @@ inline void assign(Node <T>*& pDestination, const Node <T>* pSource) // -- Jon
     {
         pDes->data = pSrc->data;
         pDes = pDes->pNext;
-        pSrc = pSrc->pNext
+        pSrc = pSrc->pNext;
 
 
             /*IF pSrc ≠ NULL
@@ -170,9 +170,8 @@ inline void assign(Node <T>*& pDestination, const Node <T>* pSource) // -- Jon
         }
         /*if (setToNull)
             pDestination = NULL;*/
+    //}
     }
-    }
-    */
 }
 
 /***********************************************
