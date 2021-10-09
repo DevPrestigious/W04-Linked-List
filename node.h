@@ -1,4 +1,4 @@
-﻿/***********************************************************************
+/***********************************************************************
  * Header:
  *    NODE
  * Summary:
@@ -36,32 +36,37 @@ public:
    //
    // Construct
    //
-    
-   Node() // DEFAULT -- Alex
-   { 
-       /*Node.default - constructor()
-           data <- T()
-           pNext <- NULL
-           pPrev <- NULL*/
-       data = T();
-       pNext = pPrev = NULL; // added by steve
-   }
-   Node(const T& data) // COPY -- Jon
-   {
-       // COPY VALUE CONSTRUCTOR
-       /*Node.copy-constructor(t)
-             data <- t
-             pNext <- NULL
-             pPrev <- NULL*/
-       this->data = std::move(data);
-       pNext = pPrev = NULL;
-   }
+//
+//   Node() // DEFAULT -- Alex
+//   {
+//       /*Node.default - constructor()
+//           data <- T()
+//           pNext <- NULL
+//           pPrev <- NULL*/
+//      data = T();
+//       pNext = pPrev = NULL; // added by steve
+//   }
+//   Node(const T& data) // COPY -- Jon
+//   {
+//       // COPY VALUE CONSTRUCTOR
+//       /*Node.copy-constructor(t)
+//             data <- t
+//             pNext <- NULL
+//             pPrev <- NULL*/
+//       this->data = std::move(data);
+//       pNext = pPrev = NULL;
+//   }
+//
+//   Node(T&& data) // MOVE -- Steve
+//   {
+//       this->data = std::move(data);
+//   }
+//
+    // Updated constructors, works on Mac's xCode now. Suck it Windows.
 
-   Node(T&& data) // MOVE -- Steve
-   {
-       this->data = std::move(data);
-   }
-
+    Node(               ) : pNext(nullptr), pPrev(nullptr), data(               ) { } // Default constructor
+    Node(const T &  data) : pNext(nullptr), pPrev(nullptr), data(data           ) { } // Copy Constructor
+    Node(      T && data) : pNext(nullptr), pPrev(nullptr), data(std::move(data)) { } // Move Constructor
    //
    // Member variables
    //
@@ -90,19 +95,20 @@ inline Node <T> * copy(const Node <T> * pSource)
            4. FOR pSrc <- pSrc.pNext … end of the list
            5. pDes <- insert(pSrc.data, pDes, true)
            6. RETURN pDestination*/
-
-    if (pSource == NULL)
+    
+    //Changed this back to the last commit, as it was working fine.
+    if (pSource == nullptr)
         return nullptr;
 
-    auto pDestination = new Node<T>(pSource->data);
-    auto pSrc = pSource;
-    auto pDes = pDestination;
+    Node <T> * pDestination = new Node<T>(pSource->data);
+    const Node <T> * pSrc = pSource;
+    Node <T> * pDes = pDestination;
 
-    for (; pSrc; pSrc = pSrc->pNext) {
+    for (pSrc = pSrc->pNext; pSrc; pSrc = pSrc->pNext) {
         pDes = insert(pDes, pSrc->data, true);
     }
 
-    return pDes;
+    return pDestination;
 }
 
 /***********************************************
@@ -117,75 +123,116 @@ template <class T>
 inline void assign(Node <T>*& pDestination, const Node <T>* pSource)
 {
     
-  /*pSrc <- pSource
-    pDes <- pDestination
-    WHILE pSrc != NULL AND pDes != NULL
-         pDes.data <- pSrc.data
-         pDes <- pDes.pNext
-         pSrc <- pSrc.pNext*/
-    auto pDes = pDestination;
-    auto pSrc = pSource;
+//  /*pSrc <- pSource
+//    pDes <- pDestination
+//    WHILE pSrc != NULL AND pDes != NULL
+//         pDes.data <- pSrc.data
+//         pDes <- pDes.pNext
+//         pSrc <- pSrc.pNext*/
+//    auto pDes = pDestination;
+//    auto pSrc = pSource;
+//
+//    while (pSrc != NULL && pDes != NULL)
+//    {
+//
+//
+//        //pDes.data <- pSrc.data
+//        pDes->data = pSrc->data;
+//        pDes = pDes->pNext;
+//        pSrc = pSrc->pNext;
+//
+//        /*IF pSrc != NULL
+//             pDes <- pDesPrevious
+//             WHILE pSrc != NULL
+//                pDes <- insert(pDes, pSrc.data, TRUE)
+//                IF pDestination = NULL
+//                    pDestination <- pDes
+//        */
+//        // ...We will accomplish this by maintaining a pDesPrevious pointer. (page 92 of book)
+//        auto pDesPrevious = pDes;
+//        auto pSrcPrevious = pSrc;
+//
+//        if (pSrc != NULL) {
+//            pDes = pDesPrevious;
+//            while (pSrc != NULL) {
+//                pDes = insert(pDes, pSrc->data, true);
+//                if (pDestination == NULL)
+//                {
+//                    pDestination = pDes;
+//                }
+//                pSrc = pSrc->pNext;
+//            }
+//            pSrc = pSrcPrevious;
+//        }
+//            /*IF pSrc != NULL
+//                setToNull <- FALSE
+//                IF pDes.pRev != NULL
+//                pDes.pPrev.pNext <- NULL
+//                ELSE
+//                setToNull <- TRUE
+//                freeData(pDes)
+//                IF setToNull
+//                pDestination <- NULL
+//            */
+//        if (pSrc != NULL) {
+//            bool setToNull = false;
+//
+//            if (pDes->pPrev != NULL)
+//            {
+//                pDes->pPrev->pNext = NULL;
+//            }
+//            else
+//            {
+//                setToNull = true;
+//            }
+//            clear(pDes);
+//
+//            if (setToNull)
+//            {
+//                pDestination = NULL;
+//            }
+//        }
+//    }
+    const Node <T> * pSrc;
+    Node <T> * pDes = pDestination;
+    Node <T> * pDesPrevious = nullptr;
 
-    while (pSrc != NULL && pDes != NULL)
+    // replace the slots the are already filled using the assignment operator
+    for (pSrc = pSource; pSrc != nullptr && pDes != nullptr; pSrc = pSrc->pNext)
     {
-        
+       pDes->data = pSrc->data;
+       pDesPrevious = pDes;
+       pDes = pDes->pNext;
+    }
 
-        //pDes.data <- pSrc.data
-        pDes->data = pSrc->data;
-        pDes = pDes->pNext;
-        pSrc = pSrc->pNext;
-
-        /*IF pSrc != NULL
-             pDes <- pDesPrevious
-             WHILE pSrc != NULL
-                pDes <- insert(pDes, pSrc.data, TRUE)
-                IF pDestination = NULL
-                    pDestination <- pDes
-        */
-        // ...We will accomplish this by maintaining a pDesPrevious pointer. (page 92 of book)
-        auto pDesPrevious = pDes; 
-        auto pSrcPrevious = pSrc; // added so that the future if statement still works.
-        
-        if (pSrc != NULL) {
-            pDes = pDesPrevious;
-            while (pSrc != NULL) {
-                pDes = insert(pDes, pSrc->data, true);
-                if (pDestination == NULL)
-                {
-                    pDestination = pDes;
-                }
-                pSrc = pSrc->pNext;
-            }
-            pSrc = pSrcPrevious;
-        }
-            /*IF pSrc != NULL
-                setToNull <- FALSE
-                IF pDes.pRev != NULL
-                pDes.pPrev.pNext <- NULL
-                ELSE
-                setToNull <- TRUE
-                freeData(pDes)
-                IF setToNull
-                pDestination <- NULL
-            */
-        if (pSrc != NULL) {
-            bool setToNull = false;
-
-            if (pDes->pPrev != NULL) 
-            {
-                pDes->pPrev->pNext = NULL;
-            }
-            else 
-            {
-                setToNull = true;
-            }
-            clear(pDes);
-
-            if (setToNull) 
-            {
-                pDestination = NULL;
-            }
-        }
+    // if there are still items the source list, then insert them on the end
+    if (pSrc != nullptr)
+    {
+       // since pDes must equal nullptr, we need to set pDes to end of the list.
+       pDes = pDesPrevious;
+       // for each node extra that pSrc has but not pDes.
+       for (; pSrc != nullptr; pSrc = pSrc->pNext)
+       {
+          // create a new node
+          pDes = insert(pDes, pSrc->data, true /* after */);
+          // if the destination list was previously empty, fill it now
+          if (nullptr == pDestination)
+             pDestination = pDes;
+       }
+    }
+    // if there are still items in the destination list that are not needed, then delete them
+    else if (pDes != nullptr)
+    {
+       bool setToNull = false;
+       // make the previous item in the list the last
+       if (pDes->pPrev)
+          pDes->pPrev->pNext = nullptr;
+       else
+          setToNull = true;
+       // now delete the list from here on out
+       clear(pDes);
+       if (setToNull)
+          pDestination = nullptr;
     }
 }
 
