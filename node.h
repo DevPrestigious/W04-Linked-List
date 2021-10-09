@@ -144,7 +144,7 @@ inline void assign(Node <T>*& pDestination, const Node <T>* pSource)
         */
         // ...We will accomplish this by maintaining a pDesPrevious pointer. (page 92 of book)
         auto pDesPrevious = pDes; 
-        auto pSrcPrevious = pSrc;
+        auto pSrcPrevious = pSrc; // added so that the future if statement still works.
         
         if (pSrc != NULL) {
             pDes = pDesPrevious;
