@@ -36,34 +36,6 @@ public:
    //
    // Construct
    //
-//
-//   Node() // DEFAULT -- Alex
-//   {
-//       /*Node.default - constructor()
-//           data <- T()
-//           pNext <- NULL
-//           pPrev <- NULL*/
-//      data = T();
-//       pNext = pPrev = NULL; // added by steve
-//   }
-//   Node(const T& data) // COPY -- Jon
-//   {
-//       // COPY VALUE CONSTRUCTOR
-//       /*Node.copy-constructor(t)
-//             data <- t
-//             pNext <- NULL
-//             pPrev <- NULL*/
-//       this->data = std::move(data);
-//       pNext = pPrev = NULL;
-//   }
-//
-//   Node(T&& data) // MOVE -- Steve
-//   {
-//       this->data = std::move(data);
-//   }
-//
-    // Updated constructors, works on Mac's xCode now. Suck it Windows.
-
     Node(               ) : pNext(nullptr), pPrev(nullptr), data(               ) { } // Default constructor
     Node(const T &  data) : pNext(nullptr), pPrev(nullptr), data(data           ) { } // Copy Constructor
     Node(      T && data) : pNext(nullptr), pPrev(nullptr), data(std::move(data)) { } // Move Constructor
@@ -87,16 +59,6 @@ public:
 template <class T>
 inline Node <T> * copy(const Node <T> * pSource)
 {
-    // COPY
-       /*copy(pSource)
-           1. pDestination <- new Node(pSource.data)
-           2. pSrc <- pSource
-           3. pDes <- pDestination
-           4. FOR pSrc <- pSrc.pNext … end of the list
-           5. pDes <- insert(pSrc.data, pDes, true)
-           6. RETURN pDestination*/
-    
-    //Changed this back to the last commit, as it was working fine.
     if (pSource == nullptr)
         return nullptr;
 
@@ -122,77 +84,6 @@ inline Node <T> * copy(const Node <T> * pSource)
 template <class T>
 inline void assign(Node <T>*& pDestination, const Node <T>* pSource)
 {
-    
-//  /*pSrc <- pSource
-//    pDes <- pDestination
-//    WHILE pSrc != NULL AND pDes != NULL
-//         pDes.data <- pSrc.data
-//         pDes <- pDes.pNext
-//         pSrc <- pSrc.pNext*/
-//    auto pDes = pDestination;
-//    auto pSrc = pSource;
-//
-//    while (pSrc != NULL && pDes != NULL)
-//    {
-//
-//
-//        //pDes.data <- pSrc.data
-//        pDes->data = pSrc->data;
-//        pDes = pDes->pNext;
-//        pSrc = pSrc->pNext;
-//
-//        /*IF pSrc != NULL
-//             pDes <- pDesPrevious
-//             WHILE pSrc != NULL
-//                pDes <- insert(pDes, pSrc.data, TRUE)
-//                IF pDestination = NULL
-//                    pDestination <- pDes
-//        */
-//        // ...We will accomplish this by maintaining a pDesPrevious pointer. (page 92 of book)
-//        auto pDesPrevious = pDes;
-//        auto pSrcPrevious = pSrc;
-//
-//        if (pSrc != NULL) {
-//            pDes = pDesPrevious;
-//            while (pSrc != NULL) {
-//                pDes = insert(pDes, pSrc->data, true);
-//                if (pDestination == NULL)
-//                {
-//                    pDestination = pDes;
-//                }
-//                pSrc = pSrc->pNext;
-//            }
-//            pSrc = pSrcPrevious;
-//        }
-//            /*IF pSrc != NULL
-//                setToNull <- FALSE
-//                IF pDes.pRev != NULL
-//                pDes.pPrev.pNext <- NULL
-//                ELSE
-//                setToNull <- TRUE
-//                freeData(pDes)
-//                IF setToNull
-//                pDestination <- NULL
-//            */
-//        if (pSrc != NULL) {
-//            bool setToNull = false;
-//
-//            if (pDes->pPrev != NULL)
-//            {
-//                pDes->pPrev->pNext = NULL;
-//            }
-//            else
-//            {
-//                setToNull = true;
-//            }
-//            clear(pDes);
-//
-//            if (setToNull)
-//            {
-//                pDestination = NULL;
-//            }
-//        }
-//    }
     const Node <T> * pSrc;
     Node <T> * pDes = pDestination;
     Node <T> * pDesPrevious = nullptr;
@@ -244,7 +135,6 @@ inline void assign(Node <T>*& pDestination, const Node <T>* pSource)
 template <class T>
 inline void swap(Node <T>* &pLHS, Node <T>* &pRHS)
 {
-    // Not sure if this is even called upon, but it produces no errors or testnodes
     Node <T>* test = std::move(pLHS);
     pLHS = std::move(pRHS);
     pRHS = std::move(test);
@@ -260,20 +150,6 @@ inline void swap(Node <T>* &pLHS, Node <T>* &pRHS)
 template <class T>
 inline Node <T> * remove(const Node <T> * pRemove)
 {
-    /*remove(pRemove)
-        IF NULL = pRemove
-        RETURN
-        IF pRemove.pPrev
-        pRemove.pPrev.pNext <- pRemove.pNext
-        IF pRemove.pNext
-        pRemove.pNext.pPrev <- pRemove.pPrev
-        IF pRemove.pPrev
-        pReturn <- pRemove.pPrev;
-    ELSE
-        pReturn <- pRemove.pNext
-        DELETE pRemove
-        RETURN pReturn*/
-
     Node <T>* pReturn = NULL;
     if (pRemove == NULL)
         return pReturn;
@@ -307,49 +183,26 @@ inline Node <T> * insert(Node <T> * pCurrent,
                   const T & t,
                   bool after = false)
 {
-    /*insert(t, pCurrent, after)
-        1. pNew <- NEW Node(t)
-        2. IF pCurrent != NULL and after = false
-        3. pNew.pNext <- pCurrent
-        4. pNew.pPrev <- pCurrent.pPrev
-        5. pCurrent.pPrev <- pNew
-        6. IF pNew.pPrev
-        7. pNew.pPrev.pNext <- pNew
-        8. IF pCurrent != NULL and after = true
-        … something similar …
-        9. RETURN pNew*/
-
-    // 1. pNew <- NEW Node(t)
     Node <T>* pNew = new Node <T>(t);
 
-    // 2. IF pCurrent != NULL and after = false
     if (pCurrent != NULL && !after)
     {
-        // 4. pNew.pPrev <- pCurrent.pPrev
         pNew->pPrev = pCurrent->pPrev;
-        // 3. pNew.pNext <- pCurrent
         pNew->pNext = pCurrent;
         
-        // 5. pCurrent.pPrev <- pNew
         pCurrent->pPrev = pNew;
-        // 6. IF pNew.pPrev
         if (pNew->pPrev)
-            // 7. pNew.pPrev.pNext <- pNew
             pNew->pPrev->pNext = pNew;
     }
-    // 8. IF pCurrent != NULL and after = true
     else if (pCurrent != NULL && after)
     {  
-        // … something similar …
         pNew->pNext = pCurrent->pNext;
         pNew->pPrev = pCurrent;
         
         pCurrent->pNext = pNew;
         if (pNew->pNext)
             pNew->pNext->pPrev = pNew;
-
     }
-    // 9. RETURN pNew*/
     return pNew;
 }
 
@@ -365,11 +218,6 @@ inline Node <T> * insert(Node <T> * pCurrent,
 template <class T>
 inline size_t size(const Node <T> * pHead)
 {
-    //size(pHead)
-    //    IF pHead = NULL
-    //RETURN 0
-    //    ELSE
-    //RETURN 1 + size(pHead.pNext)
     if (pHead == nullptr) {
         return 0;
     }
@@ -409,11 +257,6 @@ inline std::ostream & operator << (std::ostream & out, const Node <T> * pHead)
 template <class T>
 inline void clear(Node <T> * & pHead)
 {
-    /*clear(pHead)
-        WHILE pHead != NULL
-        pDelete <- pHead
-        pHead <- pHead.pNext
-        DELETE pDelete*/
 
     Node <T>* pDelete = pHead; // redundant for first loop, but oh well
     while (pHead != nullptr) {
@@ -423,5 +266,3 @@ inline void clear(Node <T> * & pHead)
     }
     delete pHead;
 }
-
-
