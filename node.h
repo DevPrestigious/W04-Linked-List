@@ -66,9 +66,8 @@ inline Node <T> * copy(const Node <T> * pSource)
     const Node <T> * pSrc = pSource;
     Node <T> * pDes = pDestination;
 
-    for (pSrc = pSrc->pNext; pSrc; pSrc = pSrc->pNext) 
+    for (pSrc = pSrc->pNext; pSrc; pSrc = pSrc->pNext)
         pDes = insert(pDes, pSrc->data, true);
-    
 
     return pDestination;
 }
@@ -218,9 +217,8 @@ inline Node <T> * insert(Node <T> * pCurrent,
 template <class T>
 inline size_t size(const Node <T> * pHead)
 {
-    if (pHead == nullptr) {
+    if (pHead == nullptr)
         return 0;
-    }
     return size(pHead->pNext) + 1;
 }
 
